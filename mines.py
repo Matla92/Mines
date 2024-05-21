@@ -129,8 +129,10 @@ def play_game():
     # Game loop
     first_move = True
     while True:
+        method = input("enter method you want to use: (reveal_3x3 = 3/reveal_2x2 = 2/classic = 1)").lower()
         row_input = input("Enter row to reveal (1-8): ")
         col_input = input("Enter column to reveal (a-h): ")
+        # TODO: Verifz input
 
         if not row_input.isdigit() or not col_input.isalpha():
             print("Invalid input! Row should be a number between 1 and 8, column should be a letter between 'a' and 'h'.")
@@ -149,7 +151,15 @@ def play_game():
                 continue
             first_move = False
 
-        if not game.reveal(row, col):
+        clear = True
+        if method == "1":
+            clear = game.reveal(row, col)
+        elif method == "2":
+            clear = game.reveal_2x2(row, col)
+        elif method == "3":
+            clear = game.reveal_3x3(row, col)
+
+        if not clear:
             print("Game Over! You hit a mine.")
             game.print_board(reveal=True)
             break
