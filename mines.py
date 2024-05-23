@@ -129,7 +129,25 @@ def play_game():
     # Game loop
     first_move = True
     while True:
-        method = input("enter method you want to use: (reveal_3x3 = 3/reveal_2x2 = 2/classic = 1)").lower()
+        method = None
+        while method == None:
+            print("I have:")
+            print("\t" + str(reveal_3x3) + " 3x3 methods")
+            print("\t" + str(reveal_2x2) + " 2x2 methods")
+            print("\t" + str(coins) + " coins")
+            print("\t" + str(hearts) + " hearts")
+            method_in = input("What to do? (shopping = 4, reveal_3x3 = 3, reveal_2x2 = 2, classic = 1)").lower()
+            if method_in == "3" and reveal_3x3 > 0:
+                method = method_in
+            elif method_in == "2" and reveal_2x2 > 0:
+                method = method_in
+            elif method_in == "1":
+                method = method_in
+            elif method_in == "4" and coins > 0:
+                shop(coins, hearts,reveal_2x2,reveal_3x3)
+            else:
+                print("I cannot do that.")
+
         row_input = input("Enter row to reveal (1-8): ")
         col_input = input("Enter column to reveal (a-h): ")
         # TODO: Verifz input
@@ -155,42 +173,10 @@ def play_game():
         if method == "1":
             clear = game.reveal(row, col)
         elif method == "2":
-            if reveal_2x2 > 0:
-                clear = game.reveal_2x2(row, col)
-            elif reveal_2x2 < 1:
-                choice = input("You dont have any reveal_2x2 you have to buy it in shop? Wanna go in shop, use reveal_3x3 or classic?(shop = 1/reveal_3x3 = 2, classic = 3)").lower() 
-                if choice == "1":
-                   shop(coins, hearts,reveal_2x2,reveal_3x3)
-                if choice == "2":
-                    if reveal_3x3 > 0:
-                        clear = game.reveal_3x3(row, col)
-                    elif reveal_3x3 < 1:
-                        choice3 = input("You dont have any reveal_3x3 you have to buy it in shop? Wanna go in shop or use classic?(shop = 1/classic = 2)")
-                        if choice3 == "1":
-                            shop(coins, hearts,reveal_2x2,reveal_3x3)
-                        elif choice3 == "2":
-                            clear = game.reveal(row, col)
-                if choice == "3":
-                   clear = game.reveal(row, col)      
+            clear = game.reveal_2x2(row, col)
         elif method == "3":
-            if reveal_3x3 > 0:
-                clear = game.reveal_3x3(row, col)
-            elif reveal_3x3 < 1:
-                choice2 = input("You dont have any reveal_3x3 you have to buy it in shop? Wanna go in shop, use reveal_2x2 or classic?(shop = 1/reveal_2x2 = 2/classic = 1)")
-                if choice2 == "1":
-                   shop(coins, hearts,reveal_2x2,reveal_3x3)
-                if choice == "2":
-                    if reveal_3x3 > 0:
-                        clear = game.reveal_3x3(row, col)
-                    elif reveal_3x3 < 1:
-                        choice4 = input("You dont have any reveal_3x3 you have to buy it in shop? Wanna go in shop or use classic?(shop = 1/classic = 2)")
-                        if choice4 == "1":
-                            shop(coins, hearts,reveal_2x2,reveal_3x3)
-                        elif choice4 == "2":
-                            clear = game.reveal(row, col) 
-                if choice == "3":
-                   clear = game.reveal(row, col)   
-
+            clear = game.reveal_3x3(row, col)
+           
         if not clear:
             print("Game Over! You hit a mine.")
             game.print_board(reveal=True)
