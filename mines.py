@@ -155,9 +155,41 @@ def play_game():
         if method == "1":
             clear = game.reveal(row, col)
         elif method == "2":
-            clear = game.reveal_2x2(row, col)
+            if reveal_2x2 > 0:
+                clear = game.reveal_2x2(row, col)
+            elif reveal_2x2 < 1:
+                choice = input("You dont have any reveal_2x2 you have to buy it in shop? Wanna go in shop, use reveal_3x3 or classic?(shop = 1/reveal_3x3 = 2, classic = 3)").lower() 
+                if choice == "1":
+                   shop(coins, hearts,reveal_2x2,reveal_3x3)
+                if choice == "2":
+                    if reveal_3x3 > 0:
+                        clear = game.reveal_3x3(row, col)
+                    elif reveal_3x3 < 1:
+                        choice3 = input("You dont have any reveal_3x3 you have to buy it in shop? Wanna go in shop or use classic?(shop = 1/classic = 2)")
+                        if choice3 == "1":
+                            shop(coins, hearts,reveal_2x2,reveal_3x3)
+                        elif choice3 == "2":
+                            clear = game.reveal(row, col)
+                if choice == "3":
+                   clear = game.reveal(row, col)      
         elif method == "3":
-            clear = game.reveal_3x3(row, col)
+            if reveal_3x3 > 0:
+                clear = game.reveal_3x3(row, col)
+            elif reveal_3x3 < 1:
+                choice2 = input("You dont have any reveal_3x3 you have to buy it in shop? Wanna go in shop, use reveal_2x2 or classic?(shop = 1/reveal_2x2 = 2/classic = 1)")
+                if choice2 == "1":
+                   shop(coins, hearts,reveal_2x2,reveal_3x3)
+                if choice == "2":
+                    if reveal_3x3 > 0:
+                        clear = game.reveal_3x3(row, col)
+                    elif reveal_3x3 < 1:
+                        choice4 = input("You dont have any reveal_3x3 you have to buy it in shop? Wanna go in shop or use classic?(shop = 1/classic = 2)")
+                        if choice4 == "1":
+                            shop(coins, hearts,reveal_2x2,reveal_3x3)
+                        elif choice4 == "2":
+                            clear = game.reveal(row, col) 
+                if choice == "3":
+                   clear = game.reveal(row, col)   
 
         if not clear:
             print("Game Over! You hit a mine.")
