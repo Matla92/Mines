@@ -215,37 +215,37 @@ def play_game():
 
 def shop(coins, hearts,reveal_2x2,reveal_3x3):
     print("Welcome to the shop!")
-    print("You have {} coins, {} hearts, {} reveal_2x2 and {} reveal_3x3").format(coins, hearts, reveal_2x2, reveal_3x3)
-    purchase = input("Do you want to buy a heart for 1 coin or reveal_2x2 for 2 coins of reveal_3x3 for 4 coins or random for 3 coins?").lower()
-    if purchase == "heart" and coins >= 1:
-        hearts += 1
-        coins -= 1
-        print("You bought a heart! You now have {} hearts and {} coins left.".format(hearts, coins))
-    if purchase == "heart" and coins < 1:
-        print("You don't have enough coins to buy a heart.")
-    if purchase == "revealing" and coins < 2:
-        reveal_2x2 += 1
-        coins -=2
-    if purchase == "revealing" and coins < 4:
-        reveal_3x3 += 1
-        coins -=4
-    if purchase == "random" and coins < 3:
-        random_number = random.randint(1, 4)
-        if random_number == 1:
-            print ("nothing")
-        if random_number == 2:
+    print("You have {} coins, {} hearts, {} reveal_2x2 and {} reveal_3x3".format(coins, hearts, reveal_2x2, reveal_3x3))
+    print("Do you want to buy a heart for 1 coin or reveal_2x2 for 2 coins of reveal_3x3 for 4 coins or random for 3 coins?")
+    while True:
+        purchase = input("heart = 1, 2x2 = 2, 3x3 = 3, random = 4, exit = 5 ").lower()
+        if purchase == "1" and coins >= 1:
             hearts += 1
-            print ("you have won heart")
-        if random_number == 3:
+            coins -= 1
+            print("You bought a heart! You now have {} hearts and {} coins left.".format(hearts, coins))
+        elif purchase == "2" and coins > 1:
             reveal_2x2 += 1
-            print("you have won revealing_2x2")
-        else:
+            coins -=2
+        elif purchase == "3" and coins > 3:
             reveal_3x3 += 1
-            print("you have won revealing_3x3")
-    
-    else:
-        print("Okay, exiting the shop.")
-        play_game()
+            coins -=4
+        elif purchase == "4" and coins > 2:
+            random_number = random.randint(1, 4)
+            if random_number == 1:
+                print ("nothing")
+            elif random_number == 2:
+                hearts += 1
+                print ("you have won heart")
+            elif random_number == 3:
+                reveal_2x2 += 1
+                print("you have won revealing_2x2")
+            else:
+                reveal_3x3 += 1
+                print("you have won revealing_3x3")
+        elif purchase == "5":
+            return
+        else:
+            print("We don´t have that.")
 
 if __name__ == "__main__":
     play_game()
