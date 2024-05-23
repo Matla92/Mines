@@ -144,7 +144,7 @@ def play_game():
             elif method_in == "1":
                 method = method_in
             elif method_in == "4" and coins > 0:
-                shop(coins, hearts,reveal_2x2,reveal_3x3)
+                (coins, hearts, reveal_2x2, reveal_3x3) = shop(coins, hearts,reveal_2x2,reveal_3x3)
             else:
                 print("I cannot do that.")
 
@@ -209,7 +209,7 @@ def play_game():
     # Ask if the player wants to shop or play again
     choice = input("Do you want to go to the shop (shop) or play again (play)? ").lower()
     if choice == "shop":
-        shop(coins, hearts,reveal_2x2,reveal_3x3)
+        (coins, hearts, reveal_2x2, reveal_3x3) = shop(coins, hearts,reveal_2x2,reveal_3x3)
     elif choice == "play":
         play_game()
 
@@ -243,7 +243,7 @@ def shop(coins, hearts,reveal_2x2,reveal_3x3):
                 reveal_3x3 += 1
                 print("you have won revealing_3x3")
         elif purchase == "5":
-            return
+            return coins, hearts, reveal_2x2, reveal_3x3
         else:
             print("We don´t have that.")
 
