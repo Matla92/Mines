@@ -201,21 +201,22 @@ def play_game():
         if all(all(visited for visited in row) for row in game.visited):
             print("Congratulations! You've won!")
             game.print_board(reveal=True)
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            print("Time elapsed:", round(elapsed_time, 2), "seconds")
+
+            # Calculate coins earned based on elapsed time
+            if elapsed_time <= 150:  # 2 minutes and 30 seconds
+                coins += 6
+            elif elapsed_time <= 180:  # 3 minutes
+                coins += 4
+            elif elapsed_time <= 225:  # 3 minutes and 45 seconds
+                coins += 2
+            else:
+                coins += 1
             break
 
-        end_time = time.time()
-        elapsed_time = end_time - start_time
-        print("Time elapsed:", round(elapsed_time, 2), "seconds")
-
-        # Calculate coins earned based on elapsed time
-        if elapsed_time <= 150:  # 2 minutes and 30 seconds
-            coins += 6
-        elif elapsed_time <= 180:  # 3 minutes
-            coins += 4
-        elif elapsed_time <= 225:  # 3 minutes and 45 seconds
-            coins += 2
-        else:
-            coins += 1
+           
 
     print("Coins earned:", coins)
 
