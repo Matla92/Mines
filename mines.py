@@ -229,8 +229,8 @@ def play_game():
 
 def shop(coins, hearts,reveal_2x2,reveal_3x3):
     print("Welcome to the shop!")
-    print("You have {} coins and {} hearts.".format(coins, hearts))
-    purchase = input("Do you want to buy a heart for 1 coin or revealing for 2 coins of better revealing for 4 coins or random for 3 coins? (revealing is 2x2 and better revealing is 3x3) ").lower()
+    print("You have {} coins, {} hearts, {} reveal_2x2 and {} reveal_3x3").format(coins, hearts, reveal_2x2, reveal_3x3)
+    purchase = input("Do you want to buy a heart for 1 coin or reveal_2x2 for 2 coins of reveal_3x3 for 4 coins or random for 3 coins?").lower()
     if purchase == "heart" and coins >= 1:
         hearts += 1
         coins -= 1
