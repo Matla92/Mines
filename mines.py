@@ -173,8 +173,10 @@ def play_game():
         if method == "1":
             clear = game.reveal(row, col)
         elif method == "2":
+            reveal_2x2 -= 1
             clear = game.reveal_2x2(row, col)
         elif method == "3":
+            reveal_3x3 -= 1
             clear = game.reveal_3x3(row, col)
            
         if not clear:
@@ -205,7 +207,6 @@ def play_game():
            
 
     print("Coins earned:", coins)
-
     # Ask if the player wants to shop or play again
     choice = input("Do you want to go to the shop (shop) or play again (play)? ").lower()
     if choice == "shop":
@@ -216,7 +217,12 @@ def play_game():
 def shop(coins, hearts,reveal_2x2,reveal_3x3):
     print("Welcome to the shop!")
     print("You have {} coins, {} hearts, {} reveal_2x2 and {} reveal_3x3".format(coins, hearts, reveal_2x2, reveal_3x3))
-    print("Do you want to buy a heart for 1 coin or reveal_2x2 for 2 coins of reveal_3x3 for 4 coins or random for 3 coins?")
+    print("Here is shop items and what will cost each item.")
+    print("Heart = 1 coin")
+    print("reveal_2x2 = 2 coins")
+    print("reveal_3x3 = 4 coins")
+    print("random = 3 coins")
+    
     while True:
         purchase = input("heart = 1, 2x2 = 2, 3x3 = 3, random = 4, exit = 5 ").lower()
         if purchase == "1" and coins >= 1:
@@ -226,9 +232,11 @@ def shop(coins, hearts,reveal_2x2,reveal_3x3):
         elif purchase == "2" and coins > 1:
             reveal_2x2 += 1
             coins -=2
+            print("You bought a reveal_2x2! You now have {} reveal_2x2 and {} coins left.".format(reveal_2x2, coins))
         elif purchase == "3" and coins > 3:
             reveal_3x3 += 1
             coins -=4
+            print("You bought a reveal_3x3! You now have {} reveal_3x3 and {} coins left.".format(reveal_3x3, coins))
         elif purchase == "4" and coins > 2:
             random_number = random.randint(1, 4)
             if random_number == 1:
@@ -236,12 +244,15 @@ def shop(coins, hearts,reveal_2x2,reveal_3x3):
             elif random_number == 2:
                 hearts += 1
                 print ("you have won heart")
+                print("You now have {} hearts and {} coins left.".format(hearts, coins))
             elif random_number == 3:
                 reveal_2x2 += 1
-                print("you have won revealing_2x2")
+                print("you have won reveal_2x2")
+                print("You now have {} reveal_2x2 and {} coins left.".format(reveal_2x2, coins))
             else:
                 reveal_3x3 += 1
-                print("you have won revealing_3x3")
+                print("you have won reveal_3x3")
+                print("You now have {} reveal_3x3 and {} coins left.".format(reveal_3x3, coins))
         elif purchase == "5":
             return coins, hearts, reveal_2x2, reveal_3x3
         else:
