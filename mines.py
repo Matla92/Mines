@@ -173,7 +173,7 @@ def play_game():
         if method == "1":
             clear = game.reveal(row, col)
         elif method == "2":
-            reveal_2x2 -= 1
+            reveal_2x2 -= 1   
             clear = game.reveal_2x2(row, col)
         elif method == "3":
             reveal_3x3 -= 1
