@@ -35,14 +35,14 @@ class Minesweeper:
 
     def print_board(self, reveal=False):
         for r in range(self.rows):
-            print(chr(ord('1') + r), end=" ")
+            print(chr(ord('1') + r), end=" ").bgcolor(42, 42, 165) #brown
             for c in range(self.cols):
                 if not reveal and not self.visited[r][c]:
                     print("?", end=" ")
                 elif self.board[r][c] == -1:
                     print("*", end=" ")  # Mine
                 else:
-                    print(self.board[r][c], end=" ")
+                    print(self.board[r][c], end=" ").bgcolor(128,128,128) #grey
             print()
         print("  ", end="")
         for i in range(self.cols):
