@@ -1,7 +1,7 @@
 import random
 import time
 import threading
-
+from termcolor import colored
 class Minesweeper:
     def __init__(self, rows, cols, mines, coins):
         self.rows = rows
@@ -35,18 +35,24 @@ class Minesweeper:
 
     def print_board(self, reveal=False):
         for r in range(self.rows):
-            print(chr(ord('1') + r), end=" ").bgcolor(42, 42, 165) #brown
+            text = colored(chr(ord('1') + r), "blue", "on_cyan")
+            print(text , end="")
             for c in range(self.cols):
                 if not reveal and not self.visited[r][c]:
-                    print("?", end=" ")
+                    text = colored("? ","red","on_green")
+                    print(text, end="")
                 elif self.board[r][c] == -1:
-                    print("*", end=" ")  # Mine
+                    text = colored("*"+" ","white","on_red", attrs=["reverse", "blink"])
+                    print(text, end="")  # Mine
                 else:
-                    print(self.board[r][c], end=" ").bgcolor(128,128,128) #grey
-            print()
-        print("  ", end="")
+                    text = colored(str(self.board[r][c])+" ", "yellow","on_magenta")
+                    print(text, end="")
+            text = colored(" ","magenta","on_magenta")
+            print(text)
+        print(" ", end="")
         for i in range(self.cols):
-            print(chr(ord('a') + i), end=" ")
+            text = colored(chr(ord('a') + i)+" ", "blue", "on_cyan")
+            print(text , end="")
         print()
 
     def reveal(self, row, col):
